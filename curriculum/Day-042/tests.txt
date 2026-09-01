@@ -1,0 +1,3 @@
+# Tests — Day 42
+
+# Add sample and edge-case tests for Palindrome String.

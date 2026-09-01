@@ -1,0 +1,3 @@
+# Tests — Day 22
+
+# Add sample and edge-case tests for Find Missing Number.

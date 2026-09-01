@@ -1,0 +1,3 @@
+# Tests — Day 69
+
+# Add sample and edge-case tests for Peak Element.

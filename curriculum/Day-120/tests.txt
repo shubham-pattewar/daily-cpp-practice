@@ -1,0 +1,3 @@
+# Tests — Day 120
+
+# Add sample and edge-case tests for Intersection of Two Linked Lists.

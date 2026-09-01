@@ -1,0 +1,3 @@
+# Tests — Day 1
+
+# Add sample and edge-case tests for Hello, C++ World.

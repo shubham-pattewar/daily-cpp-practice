@@ -1,0 +1,3 @@
+# Tests — Day 30
+
+# Add sample and edge-case tests for Majority Element.

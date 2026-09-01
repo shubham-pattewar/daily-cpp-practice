@@ -1,0 +1,3 @@
+# Tests — Day 70
+
+# Add sample and edge-case tests for Integer Square Root.

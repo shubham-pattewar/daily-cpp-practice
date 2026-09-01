@@ -1,0 +1,96 @@
+name: Daily C++ Practice
+
+on:
+  schedule:
+    - cron: '15 22 * * *'
+      timezone: 'Asia/Kolkata'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-cpp
+  cancel-in-progress: false
+
+jobs:
+  daily-cpp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find next day
+        id: day
+        shell: bash
+        run: |
+          LAST=$(find daily -maxdepth 1 -type d -name 'Day-[0-9][0-9][0-9]' \
+            -printf '%f\n' | sed 's/Day-//' | sort -n | tail -1)
+
+          if [ -z "$LAST" ]; then
+            DAY=1
+          else
+            DAY=$((10#$LAST + 1))
+          fi
+
+          echo "day=$DAY" >> "$GITHUB_OUTPUT"
+          echo "Publishing Day $DAY"
+
+      - name: Add problem
+        if: steps.day.outputs.day >= 1 && steps.day.outputs.day <= 180
+        shell: bash
+        run: |
+          DAY=${{ steps.day.outputs.day }}
+          PADDED=$(printf "%03d" "$DAY")
+          SRC="curriculum/Day-$PADDED"
+          DEST="daily/Day-$PADDED"
+
+          test -d "$SRC"
+          rm -rf "$DEST"
+          mkdir -p "$DEST"
+          cp "$SRC/problem.md" "$DEST/problem.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST/problem.md"
+          git commit -m "Day $DAY: add problem"
+          git push
+
+      - name: Add complete C++ solution
+        if: steps.day.outputs.day >= 1 && steps.day.outputs.day <= 180
+        shell: bash
+        run: |
+          DAY=${{ steps.day.outputs.day }}
+          PADDED=$(printf "%03d" "$DAY")
+          SRC="curriculum/Day-$PADDED"
+          DEST="daily/Day-$PADDED"
+
+          cp "$SRC/solution.cpp" "$DEST/solution.cpp"
+
+          g++ -std=c++17 -Wall -Wextra "$DEST/solution.cpp" -o /tmp/day_solution
+          echo "Day $DAY solution compiled successfully."
+
+          git add "$DEST/solution.cpp"
+          git commit -m "Day $DAY: add complete C++ solution"
+          git push
+
+      - name: Add explanation and tests
+        if: steps.day.outputs.day >= 1 && steps.day.outputs.day <= 180
+        shell: bash
+        run: |
+          DAY=${{ steps.day.outputs.day }}
+          PADDED=$(printf "%03d" "$DAY")
+          SRC="curriculum/Day-$PADDED"
+          DEST="daily/Day-$PADDED"
+
+          cp "$SRC/explanation.md" "$DEST/explanation.md"
+          cp "$SRC/tests.txt" "$DEST/tests.txt"
+
+          git add "$DEST/explanation.md" "$DEST/tests.txt"
+          git commit -m "Day $DAY: add explanation and tests"
+          git push
+
+      - name: Finished
+        if: steps.day.outputs.day > 180
+        run: echo "The 180-day curriculum is complete."

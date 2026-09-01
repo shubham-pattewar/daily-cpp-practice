@@ -1,0 +1,3 @@
+# Tests — Day 32
+
+# Add sample and edge-case tests for Equilibrium Index.

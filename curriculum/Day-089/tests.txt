@@ -1,0 +1,3 @@
+# Tests — Day 89
+
+# Add sample and edge-case tests for Word Pattern.

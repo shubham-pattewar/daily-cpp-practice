@@ -1,0 +1,3 @@
+# Tests — Day 119
+
+# Add sample and edge-case tests for Palindrome Linked List.

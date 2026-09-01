@@ -1,0 +1,3 @@
+# Tests — Day 12
+
+# Add sample and edge-case tests for Palindrome Number.
