@@ -1,0 +1,3 @@
+# Tests — Day 6
+
+# Add sample and edge-case tests for Factorial of a Number.
