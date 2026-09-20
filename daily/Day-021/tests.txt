@@ -1,0 +1,3 @@
+# Tests — Day 21
+
+# Add sample and edge-case tests for Linear Search.
