@@ -1,0 +1,3 @@
+# Tests — Day 23
+
+# Add sample and edge-case tests for Find Duplicate Number.
