@@ -1,0 +1,3 @@
+# Tests — Day 50
+
+# Add sample and edge-case tests for Longest Common Prefix.
