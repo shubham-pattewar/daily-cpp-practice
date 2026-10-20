@@ -1,0 +1,3 @@
+# Tests — Day 51
+
+# Add sample and edge-case tests for String Compression.
