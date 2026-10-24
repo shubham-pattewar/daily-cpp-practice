@@ -1,0 +1,3 @@
+# Tests — Day 55
+
+# Add sample and edge-case tests for Longest Repeating Character Replacement.
